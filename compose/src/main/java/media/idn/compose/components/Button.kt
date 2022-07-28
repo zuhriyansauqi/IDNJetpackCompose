@@ -2,8 +2,10 @@ package media.idn.compose.components
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.ButtonElevation
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -44,7 +46,7 @@ fun IDNButton(
     )
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun IDNButtonPreview() {
     Column(
@@ -61,15 +63,13 @@ private fun IDNButtonPreview() {
 
 @Composable
 private fun IDNButtonExample(text: String) {
-    Surface(color = IDNTheme.colors.surface) {
-        IDNButton(
-            onClick = {},
-            large = true,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-        ) {
-            Text(text = text, style = IDNTheme.typography.button)
-        }
+    IDNButton(
+        onClick = {},
+        large = true,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+    ) {
+        Text(text = text, style = IDNTheme.typography.button)
     }
 }

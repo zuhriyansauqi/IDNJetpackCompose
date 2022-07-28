@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
                             IDNMessageInfo(
                                 title = "Kode referral sudah berhasil digunakan",
                                 subtitle = "Yuk selesaikan misi dan dapatkan reward lebih",
-                                cover = R.drawable.img_referral_wallet
+                                cover = R.drawable.illustration_point
                             )
                         }
                     },

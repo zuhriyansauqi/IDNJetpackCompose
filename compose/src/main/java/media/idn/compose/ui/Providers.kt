@@ -1,5 +1,6 @@
 package media.idn.compose.ui
 
+import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
@@ -29,6 +30,7 @@ fun ProvideIDNTheme(
         LocalIDNColors provides colorPalette,
         LocalIDNTypography provides defaultTypography,
         LocalIDNShapes provides defaultShapes,
+        LocalRippleTheme provides IDNRippleTheme,
         content = content,
     )
 }

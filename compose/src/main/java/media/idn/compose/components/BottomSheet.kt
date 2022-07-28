@@ -195,7 +195,7 @@ enum class IDNBottomSheet {
     )
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun IDNBottomSheetPreview() {
     IDNTheme {

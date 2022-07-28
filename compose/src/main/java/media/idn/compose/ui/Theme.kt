@@ -26,4 +26,6 @@ object IDNTheme {
 
     val shapes: IDNShapes
         @Composable get() = LocalIDNShapes.current
+
+    val illustrations get() = IDNIllustrations
 }

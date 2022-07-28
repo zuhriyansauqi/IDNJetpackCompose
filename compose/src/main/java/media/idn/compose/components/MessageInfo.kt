@@ -10,7 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import media.idn.compose.R
 import media.idn.compose.ui.IDNTheme
 
 @Composable
@@ -48,14 +47,14 @@ fun IDNMessageInfo(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun IDNMessageInfoPreview() {
     IDNTheme {
         IDNMessageInfo(
             title = "Kode referral sudah berhasil digunakan",
             subtitle = "Yuk selesaikan misi dan dapatkan reward lebih",
-            cover = R.drawable.img_referral_wallet
+            cover = IDNTheme.illustrations.point
         )
     }
 }
