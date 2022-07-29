@@ -16,13 +16,8 @@ import media.idn.compose.ui.IDNTheme
 @Composable
 fun IDNBottomSheet(
     title: String? = null,
-    isMenu: Boolean = false,
-    contentPadding: PaddingValues = PaddingValues(horizontal = if (isMenu) 0.dp else 24.dp),
-    buttons: IDNBottomSheet = IDNBottomSheet.NO_BUTTON,
-    buttonText: IDNBottomSheet.ButtonText = IDNBottomSheet.ButtonText(),
-    onButtonClick: () -> Unit = { },
-    onPositiveButtonClick: () -> Unit = { },
-    onNegativeButtonClick: () -> Unit = { },
+    contentPadding: PaddingValues = PaddingValues(horizontal = 24.dp),
+    type: IDNBottomSheet = IDNBottomSheet.NoButton,
     content: @Composable () -> Unit
 ) {
     Column(
@@ -55,29 +50,31 @@ fun IDNBottomSheet(
             content()
         }
 
-        when (buttons) {
-            IDNBottomSheet.NO_BUTTON -> Unit
-            IDNBottomSheet.SINGLE_BUTTON ->
+        when (type) {
+            IDNBottomSheet.NoButton -> Unit
+            is IDNBottomSheet.SingleButton ->
                 SingleButton(
-                    buttonText = buttonText,
-                    onButtonClick = onButtonClick,
+                    buttonText = type.text,
+                    onButtonClick = type.onClick,
                 )
-            IDNBottomSheet.SINGLE_BUTTON_ALT ->
+            is IDNBottomSheet.SingleVariantButton ->
                 SingleAlternativeButton(
-                    buttonText = buttonText,
-                    onButtonClick = onButtonClick,
+                    buttonText = type.text,
+                    onButtonClick = type.onClick,
                 )
-            IDNBottomSheet.POSITIVE_RIGHT ->
+            is IDNBottomSheet.PositiveStartButton ->
                 PositiveRightButton(
-                    buttonText = buttonText,
-                    onNegativeButtonClick = onNegativeButtonClick,
-                    onPositiveButtonClick = onPositiveButtonClick,
+                    positiveText = type.positiveText,
+                    negativeText = type.negativeText,
+                    onNegativeButtonClick = type.onPositiveClick,
+                    onPositiveButtonClick = type.onNegativeButtonClick,
                 )
-            IDNBottomSheet.POSITIVE_LEFT ->
+            is IDNBottomSheet.PositiveEndButton ->
                 PositiveLeftButton(
-                    buttonText = buttonText,
-                    onNegativeButtonClick = onNegativeButtonClick,
-                    onPositiveButtonClick = onPositiveButtonClick,
+                    positiveText = type.positiveText,
+                    negativeText = type.negativeText,
+                    onNegativeButtonClick = type.onPositiveClick,
+                    onPositiveButtonClick = type.onNegativeButtonClick,
                 )
         }
     }
@@ -85,7 +82,8 @@ fun IDNBottomSheet(
 
 @Composable
 private fun PositiveLeftButton(
-    buttonText: IDNBottomSheet.ButtonText,
+    positiveText: String,
+    negativeText: String,
     onPositiveButtonClick: () -> Unit,
     onNegativeButtonClick: () -> Unit
 ) {
@@ -94,14 +92,21 @@ private fun PositiveLeftButton(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         modifier = Modifier.padding(horizontal = 24.dp)
     ) {
-        PositiveButton(buttonText = buttonText.PositiveButton, onButtonClick = onPositiveButtonClick)
-        NegativeButton(buttonText = buttonText.NegativeButton, onButtonClick = onNegativeButtonClick)
+        PositiveButton(
+            buttonText = positiveText,
+            onButtonClick = onPositiveButtonClick
+        )
+        NegativeButton(
+            buttonText = negativeText,
+            onButtonClick = onNegativeButtonClick
+        )
     }
 }
 
 @Composable
 private fun PositiveRightButton(
-    buttonText: IDNBottomSheet.ButtonText,
+    positiveText: String,
+    negativeText: String,
     onNegativeButtonClick: () -> Unit,
     onPositiveButtonClick: () -> Unit
 ) {
@@ -110,8 +115,14 @@ private fun PositiveRightButton(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         modifier = Modifier.padding(horizontal = 24.dp)
     ) {
-        NegativeButton(buttonText = buttonText.NegativeButton, onButtonClick = onNegativeButtonClick)
-        PositiveButton(buttonText = buttonText.PositiveButton, onButtonClick = onPositiveButtonClick)
+        NegativeButton(
+            buttonText = negativeText,
+            onButtonClick = onNegativeButtonClick
+        )
+        PositiveButton(
+            buttonText = positiveText,
+            onButtonClick = onPositiveButtonClick
+        )
     }
 }
 
@@ -155,12 +166,12 @@ private fun PositiveButton(
 
 @Composable
 private fun SingleAlternativeButton(
-    buttonText: IDNBottomSheet.ButtonText,
+    buttonText: String,
     onButtonClick: () -> Unit
 ) {
     Spacer(modifier = Modifier.height(24.dp))
     NegativeButton(
-        buttonText = buttonText.SingleButton,
+        buttonText = buttonText,
         onButtonClick = onButtonClick,
         isMaxWidth = true,
         modifier = Modifier.padding(horizontal = 24.dp)
@@ -169,30 +180,43 @@ private fun SingleAlternativeButton(
 
 @Composable
 private fun SingleButton(
-    buttonText: IDNBottomSheet.ButtonText,
+    buttonText: String,
     onButtonClick: () -> Unit
 ) {
     Spacer(modifier = Modifier.height(24.dp))
     PositiveButton(
-        buttonText = buttonText.SingleButton,
+        buttonText = buttonText,
         onButtonClick = onButtonClick,
         isMaxWidth = true,
         modifier = Modifier.padding(horizontal = 24.dp)
     )
 }
 
-enum class IDNBottomSheet {
-    NO_BUTTON,
-    SINGLE_BUTTON,
-    SINGLE_BUTTON_ALT,
-    POSITIVE_RIGHT,
-    POSITIVE_LEFT;
+sealed class IDNBottomSheet {
+    object NoButton : IDNBottomSheet()
+    data class SingleButton(
+        val text: String,
+        val onClick: () -> Unit,
+    ) : IDNBottomSheet()
 
-    data class ButtonText(
-        val SingleButton: String = "",
-        val PositiveButton: String = "",
-        val NegativeButton: String = "",
-    )
+    data class SingleVariantButton(
+        val text: String,
+        val onClick: () -> Unit,
+    ) : IDNBottomSheet()
+
+    data class PositiveStartButton(
+        val positiveText: String,
+        val negativeText: String,
+        val onPositiveClick: () -> Unit,
+        val onNegativeButtonClick: () -> Unit,
+    ) : IDNBottomSheet()
+
+    data class PositiveEndButton(
+        val positiveText: String,
+        val negativeText: String,
+        val onPositiveClick: () -> Unit,
+        val onNegativeButtonClick: () -> Unit,
+    ) : IDNBottomSheet()
 }
 
 @Preview(showBackground = true)
@@ -200,8 +224,10 @@ enum class IDNBottomSheet {
 private fun IDNBottomSheetPreview() {
     IDNTheme {
         IDNBottomSheet(
-            buttons = IDNBottomSheet.SINGLE_BUTTON_ALT,
-            buttonText = IDNBottomSheet.ButtonText(SingleButton = "Kembali"),
+            type = IDNBottomSheet.SingleVariantButton(
+                text = "Kembali",
+                onClick = { }
+            ),
         ) {
             IDNMessageInfo(
                 title = "Kode referral sudah berhasil digunakan",

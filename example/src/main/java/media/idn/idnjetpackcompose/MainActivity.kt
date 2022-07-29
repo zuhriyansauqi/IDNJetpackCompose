@@ -33,13 +33,14 @@ class MainActivity : ComponentActivity() {
                 ModalBottomSheetLayout(
                     sheetContent = {
                         IDNBottomSheet(
-                            buttons = IDNBottomSheet.SINGLE_BUTTON,
-                            buttonText = IDNBottomSheet.ButtonText(SingleButton = "Tutup"),
-                            onButtonClick = {
-                                scope.launch {
-                                    modalBottomSheetState.hide()
+                            type = IDNBottomSheet.SingleButton(
+                                text = "Tutup",
+                                onClick = {
+                                    scope.launch {
+                                        modalBottomSheetState.hide()
+                                    }
                                 }
-                            }
+                            ),
                         ) {
                             IDNMessageInfo(
                                 title = "Kode referral sudah berhasil digunakan",
