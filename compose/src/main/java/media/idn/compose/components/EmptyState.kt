@@ -18,9 +18,7 @@ fun IDNEmptyState(
     title: String,
     subtitle: String? = null,
     @DrawableRes cover: Int? = null,
-    buttonText: String? = null,
-    onButtonClick: () -> Unit = { },
-    buttonDistance: Dp = 46.dp,
+    type: IDNEmptyState = IDNEmptyState.NoButton,
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
         IDNIllustrationInfo(
@@ -29,20 +27,29 @@ fun IDNEmptyState(
             cover = cover,
             isCenterGravity = true,
         )
-        buttonText?.let {
-            Spacer(modifier = Modifier.height(buttonDistance))
+        if (type is IDNEmptyState.SingleButton) {
+            Spacer(modifier = Modifier.height(type.distance))
             IDNButton(
-                onClick = onButtonClick,
+                onClick = type.onClick,
                 large = true,
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 Text(
-                    text = it,
+                    text = type.text,
                     style = IDNTheme.typography.button,
                 )
             }
         }
     }
+}
+
+sealed class IDNEmptyState {
+    object NoButton : IDNEmptyState()
+    data class SingleButton(
+        val text: String,
+        val onClick: () -> Unit,
+        val distance: Dp = 46.dp,
+    ) : IDNEmptyState()
 }
 
 @Preview(showBackground = true)
@@ -52,7 +59,10 @@ private fun IDNEmptyStatePreview() {
         IDNEmptyState(
             title = "Halo boleh minta kontak kamu?",
             cover = IDNTheme.illustrations.left,
-            buttonText = "Yuk ijinkan",
+            type = IDNEmptyState.SingleButton(
+                text = "Yuk ijinkan",
+                onClick = { }
+            ),
         )
     }
 }
