@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import media.idn.compose.ui.IDNTheme
 
 @Composable
-fun IDNMessageInfo(
+fun IDNIllustrationInfo(
     title: String,
     subtitle: String? = null,
     @DrawableRes cover: Int? = null,
@@ -51,7 +51,7 @@ fun IDNMessageInfo(
 @Composable
 fun IDNMessageInfoPreview() {
     IDNTheme {
-        IDNMessageInfo(
+        IDNIllustrationInfo(
             title = "Kode referral sudah berhasil digunakan",
             subtitle = "Yuk selesaikan misi dan dapatkan reward lebih",
             cover = IDNTheme.illustrations.point

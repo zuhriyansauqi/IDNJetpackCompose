@@ -229,7 +229,7 @@ private fun IDNBottomSheetPreview() {
                 onClick = { }
             ),
         ) {
-            IDNMessageInfo(
+            IDNIllustrationInfo(
                 title = "Kode referral sudah berhasil digunakan",
                 subtitle = "Yuk selesaikan misi dan dapatkan reward lebih",
                 cover = IDNIllustrations.Referral.emptyMissions

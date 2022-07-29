@@ -23,7 +23,7 @@ fun IDNEmptyState(
     buttonDistance: Dp = 46.dp,
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
-        IDNMessageInfo(
+        IDNIllustrationInfo(
             title = title,
             subtitle = subtitle,
             cover = cover,

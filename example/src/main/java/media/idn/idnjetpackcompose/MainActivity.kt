@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 import media.idn.compose.R
 import media.idn.compose.components.IDNBottomSheet
 import media.idn.compose.components.IDNButton
-import media.idn.compose.components.IDNMessageInfo
+import media.idn.compose.components.IDNIllustrationInfo
 import media.idn.compose.ui.IDNTheme
 
 class MainActivity : ComponentActivity() {
@@ -42,7 +42,7 @@ class MainActivity : ComponentActivity() {
                                 }
                             ),
                         ) {
-                            IDNMessageInfo(
+                            IDNIllustrationInfo(
                                 title = "Kode referral sudah berhasil digunakan",
                                 subtitle = "Yuk selesaikan misi dan dapatkan reward lebih",
                                 cover = R.drawable.illustration_point
