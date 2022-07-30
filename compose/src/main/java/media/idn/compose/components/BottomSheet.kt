@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import media.idn.compose.resources.IDNIllustrations
+import media.idn.compose.ui.IDNIllustrations
 import media.idn.compose.ui.IDNTheme
 
 @Composable
@@ -242,7 +242,7 @@ private fun IDNBottomSheetPreview() {
                 IDNIllustrationInfo(
                     title = "Kode referral sudah berhasil digunakan",
                     subtitle = "Yuk selesaikan misi dan dapatkan reward lebih",
-                    cover = IDNIllustrations.Referral.emptyMissions
+                    cover = IDNIllustrations.empty
                 )
             }
         }
