@@ -1,10 +1,12 @@
 package media.idn.compose.components
 
+import android.content.res.Configuration
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -52,17 +54,26 @@ sealed class IDNEmptyState {
     ) : IDNEmptyState()
 }
 
-@Preview(showBackground = true)
+@Preview(
+    name = "Day Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_NO,
+)
+@Preview(
+    name = "Night Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+)
 @Composable
 private fun IDNEmptyStatePreview() {
     IDNTheme {
-        IDNEmptyState(
-            title = "Halo boleh minta kontak kamu?",
-            cover = IDNTheme.illustrations.left,
-            type = IDNEmptyState.SingleButton(
-                text = "Yuk ijinkan",
-                onClick = { }
-            ),
-        )
+        Surface(color = IDNTheme.colors.surface) {
+            IDNEmptyState(
+                title = "Halo boleh minta kontak kamu?",
+                cover = IDNTheme.illustrations.left,
+                type = IDNEmptyState.SingleButton(
+                    text = "Yuk ijinkan",
+                    onClick = { }
+                ),
+            )
+        }
     }
 }

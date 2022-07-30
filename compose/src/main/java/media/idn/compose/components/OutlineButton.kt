@@ -1,5 +1,7 @@
 package media.idn.compose.components
 
+import android.content.res.Configuration.UI_MODE_NIGHT_NO
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
@@ -45,25 +47,25 @@ fun IDNOutlinedButton(
     )
 }
 
-@Preview
+@Preview(
+    name = "Day Mode",
+    uiMode = UI_MODE_NIGHT_NO,
+)
+@Preview(
+    name = "Night Mode",
+    uiMode = UI_MODE_NIGHT_YES,
+)
 @Composable
 private fun IDNOutlinedButtonPreview() {
-    Column(
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = Modifier.fillMaxWidth(),
-    ) {
-        IDNTheme(darkTheme = false) {
-            Surface(color = IDNTheme.colors.surface) {
-                IDNOutlinedButton(onClick = {}, modifier = Modifier.fillMaxWidth().padding(16.dp)) {
-                    Text(text = "Day", style = IDNTheme.typography.buttonSmall)
-                }
-            }
-        }
-        IDNTheme(darkTheme = true) {
-            Surface(color = IDNTheme.colors.surface) {
-                IDNOutlinedButton(onClick = {}, large = true, modifier = Modifier.fillMaxWidth().padding(16.dp)) {
-                    Text(text = "Night", style = IDNTheme.typography.button)
-                }
+    IDNTheme {
+        Surface(color = IDNTheme.colors.surface) {
+            IDNOutlinedButton(
+                onClick = {},
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ) {
+                Text(text = "Button", style = IDNTheme.typography.buttonSmall)
             }
         }
     }

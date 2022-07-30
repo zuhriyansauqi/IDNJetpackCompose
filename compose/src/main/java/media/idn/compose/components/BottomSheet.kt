@@ -1,8 +1,10 @@
 package media.idn.compose.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -219,21 +221,30 @@ sealed class IDNBottomSheet {
     ) : IDNBottomSheet()
 }
 
-@Preview(showBackground = true)
+@Preview(
+    name = "Day Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_NO,
+)
+@Preview(
+    name = "Night Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+)
 @Composable
 private fun IDNBottomSheetPreview() {
     IDNTheme {
-        IDNBottomSheet(
-            type = IDNBottomSheet.SingleVariantButton(
-                text = "Kembali",
-                onClick = { }
-            ),
-        ) {
-            IDNIllustrationInfo(
-                title = "Kode referral sudah berhasil digunakan",
-                subtitle = "Yuk selesaikan misi dan dapatkan reward lebih",
-                cover = IDNIllustrations.Referral.emptyMissions
-            )
+        Surface(color = IDNTheme.colors.surface) {
+            IDNBottomSheet(
+                type = IDNBottomSheet.SingleVariantButton(
+                    text = "Kembali",
+                    onClick = { }
+                ),
+            ) {
+                IDNIllustrationInfo(
+                    title = "Kode referral sudah berhasil digunakan",
+                    subtitle = "Yuk selesaikan misi dan dapatkan reward lebih",
+                    cover = IDNIllustrations.Referral.emptyMissions
+                )
+            }
         }
     }
 }

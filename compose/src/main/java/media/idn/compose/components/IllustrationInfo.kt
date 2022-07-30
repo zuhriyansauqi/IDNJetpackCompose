@@ -1,8 +1,11 @@
 package media.idn.compose.components
 
+import android.content.res.Configuration.UI_MODE_NIGHT_NO
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -47,14 +50,23 @@ fun IDNIllustrationInfo(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(
+    name = "Day Mode",
+    uiMode = UI_MODE_NIGHT_NO,
+)
+@Preview(
+    name = "Night Mode",
+    uiMode = UI_MODE_NIGHT_YES,
+)
 @Composable
 fun IDNMessageInfoPreview() {
     IDNTheme {
-        IDNIllustrationInfo(
-            title = "Kode referral sudah berhasil digunakan",
-            subtitle = "Yuk selesaikan misi dan dapatkan reward lebih",
-            cover = IDNTheme.illustrations.point
-        )
+        Surface(color = IDNTheme.colors.surface) {
+            IDNIllustrationInfo(
+                title = "Kode referral sudah berhasil digunakan",
+                subtitle = "Yuk selesaikan misi dan dapatkan reward lebih",
+                cover = IDNTheme.illustrations.point
+            )
+        }
     }
 }

@@ -1,11 +1,9 @@
 package media.idn.compose.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.ButtonElevation
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -46,30 +44,28 @@ fun IDNButton(
     )
 }
 
-@Preview(showBackground = true)
+@Preview(
+    name = "Day Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_NO,
+)
+@Preview(
+    name = "Night Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+)
 @Composable
 private fun IDNButtonPreview() {
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-    ) {
-        IDNTheme(darkTheme = false) {
-            IDNButtonExample(text = "Day")
-        }
-        IDNTheme(darkTheme = true) {
-            IDNButtonExample(text = "Night")
+    IDNTheme {
+        Surface(color = IDNTheme.colors.surface) {
+            IDNButton(
+                onClick = {},
+                large = true,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ) {
+                Text(text = "Button", style = IDNTheme.typography.button)
+            }
         }
     }
 }
 
-@Composable
-private fun IDNButtonExample(text: String) {
-    IDNButton(
-        onClick = {},
-        large = true,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
-    ) {
-        Text(text = text, style = IDNTheme.typography.button)
-    }
-}
