@@ -234,7 +234,7 @@ private fun IDNBottomSheetPreview() {
     IDNTheme {
         Surface(color = IDNTheme.colors.surface) {
             IDNBottomSheet(
-                type = IDNBottomSheet.SingleVariantButton(
+                type = IDNBottomSheet.SingleButton(
                     text = "Kembali",
                     onClick = { }
                 ),
